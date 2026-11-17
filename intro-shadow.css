@@ -1,0 +1,6 @@
+/* Front page: ASCII cyanotype wall. Option A = intro-a.js, option B = intro-b.js
+   (pick with ?intro=a or ?intro=b; the default is set in index.html). */
+.intro-view { background: #f8f8f6; overflow: hidden; }
+.intro-wall { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+.intro-view .name-button { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.intro-view .intro-line, .intro-view .intro-hint { z-index: 2; }

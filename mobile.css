@@ -1,0 +1,67 @@
+/* Phone layout fixes. Desktop is untouched: everything here is inside max-width: 760px. */
+@media (max-width: 760px) {
+  /* 1. Header gets a soft white background once you leave the intro, so content no longer slides under the nav */
+  body[data-view="work"] .site-header,
+  body.detail-open .site-header {
+    background: rgba(255, 255, 255, .94);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  /* 2. Home: "Scroll to enter" sits above the tagline instead of on top of it */
+  .intro-hint { bottom: 96px; }
+  .intro-line { bottom: 30px; font-size: .95rem; line-height: 1.35; }
+
+  /* 3. Work gallery: each card is as big as its image, with the title right underneath */
+  .project-slide,
+  .project-slide-portrait { min-height: 72svh; padding: 4vh 6vw 9vh; }
+  .project-card,
+  .project-card.project-wide,
+  .project-card.project-square,
+  .project-card.project-portrait,
+  .project-card.project-portrait.project-narrow {
+    width: 88vw;
+    height: auto;
+  }
+  .project-card img,
+  .project-card[data-project] img {
+    width: 100%;
+    height: auto;
+    max-height: 62svh;
+    object-fit: contain;
+  }
+  .project-card.project-portrait img { width: auto; max-width: 100%; margin-inline: auto; }
+  .project-reveal,
+  .project-card .project-reveal { inset: auto 0 -50px; height: 40px; }
+  .project-reveal strong,
+  .project-card[data-project] .project-reveal strong,
+  .project-card.project-narrow .project-reveal strong { width: auto; max-width: 100%; font-size: 1.05rem; letter-spacing: -.02em; text-align: center; }
+  .project-card.project-narrow .project-reveal .passage-title { justify-content: center; }
+  /* the sideways 01—12 counter and "scroll to browse" crowded the cards */
+  .gallery-status, .scroll-hint { display: none; }
+  .work-kicker { font-size: .58rem; }
+
+  /* 5. About: a clear, easy-to-tap Close */
+  .about-close { right: 18px; top: 22px; padding: 10px 4px; font-size: .78rem; letter-spacing: .04em; }
+  .about-close:focus { outline: none; }
+}
+
+/* Arrows (↗) render as plain text glyphs, not iPhone emoji */
+html { font-variant-emoji: text; }
+
+/* iPhone/iPad draw ↗ with the emoji font (Inter from Google Fonts has no ↗).
+   On touch screens, replace the character with a drawn arrow that matches the desktop one. */
+@media (max-width: 760px), (hover: none) {
+  .arw {
+    display: inline-block;
+    width: .72em;
+    height: .72em;
+    overflow: hidden;
+    text-indent: 2em;
+    white-space: nowrap;
+    vertical-align: -.02em;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M5.5 3H13v7.5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M5.5 3H13v7.5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}

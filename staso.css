@@ -1,0 +1,58 @@
+/* Staso case study: same layout and rhythm as the Tik-Tock Glow case study. */
+.project-detail.is-staso-detail .project-detail-layout { display: none; }
+.project-detail.is-staso-detail .project-detail-page { width: min(100%, 1240px); }
+.project-detail.is-staso-detail .project-detail-page > h2 { margin-bottom: clamp(38px, 5vh, 58px); }
+.staso-case { display: grid; row-gap: clamp(104px, 10vw, 148px); }
+.staso-case[hidden] { display: none; }
+.scroll-gif { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) {
+  .staso-case { row-gap: 82px; }
+}
+.staso-media { margin: 0; overflow: hidden; border-radius: 6px; }
+.staso-media img, .staso-media video { display: block; width: 100%; height: auto; }
+
+/* Gallery card: same size as Fold With Nara, with the logo animated on top */
+.project-card[data-project="staso"] .staso-art { position: relative; display: block; width: 100%; transition: filter .55s var(--ease), transform .65s var(--ease); }
+.project-card[data-project="staso"] .staso-art img { width: 100%; height: auto; transition: none; }
+.project-slide.is-active .project-card[data-project="staso"]:hover img,
+.project-slide.is-active .project-card[data-project="staso"]:focus-visible img { filter: none; transform: none; }
+.project-slide.is-active .project-card[data-project="staso"]:hover .staso-art,
+.project-slide.is-active .project-card[data-project="staso"]:focus-visible .staso-art { filter: blur(13px) brightness(.48); transform: scale(1.045); }
+.project-card[data-project="staso"] .staso-logo-mark {
+  position: absolute; left: 22.035%; top: 8.272%; width: 1.713% !important; height: auto !important;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+/* Spins as soon as the Staso card is in view on the gallery page, then every 3s */
+body[data-view="work"]:not(.detail-open) .project-slide.is-active .project-card[data-project="staso"] .staso-logo-mark {
+  animation: staso-logo 4.8s cubic-bezier(.65, 0, .35, 1) infinite;
+}
+@keyframes staso-logo {
+  /* ~1.8s spin, then 3s still before it repeats */
+  0%     { transform: perspective(240px) rotateY(0deg) translateY(0) scale(1); }
+  6.25%  { transform: perspective(240px) rotateY(0deg) translateY(-14%) scale(1.12); }
+  25%    { transform: perspective(240px) rotateY(360deg) translateY(-14%) scale(1.12); }
+  32.3%  { transform: perspective(240px) rotateY(360deg) translateY(4%) scale(.96); }
+  37.5%, 100% { transform: perspective(240px) rotateY(360deg) translateY(0) scale(1); }
+}
+
+
+@media (prefers-reduced-motion: reduce) { .project-card[data-project="staso"] .staso-logo-mark { animation: none; } }
+@media (max-width: 760px), (hover: none) {
+  .project-slide.is-active .project-card[data-project="staso"]:hover .staso-art { filter: none; transform: none; }
+}
+
+/* Project page: the same logo spin on the laptop mockup, while the Staso page is open */
+.staso-hero { position: relative; }
+.staso-hero > img:first-child { display: block; width: 100%; height: auto; }
+.staso-hero .staso-hero-logo { position: absolute; left: 26.042%; top: 11.061%; width: 1.542% !important; height: auto !important; transform-origin: 50% 50%; }
+body.detail-open .project-detail.is-staso-detail .staso-hero .staso-hero-logo { animation: staso-logo 4.8s cubic-bezier(.65, 0, .35, 1) .4s infinite; }
+@media (prefers-reduced-motion: reduce) { .staso-hero .staso-hero-logo { animation: none !important; } }
+
+/* Orange underline under "you." drawn like a pen stroke, once */
+.staso-pen { position: absolute; inset: 0; width: 100% !important; height: 100% !important; pointer-events: none; mix-blend-mode: multiply; overflow: visible; }
+.staso-pen path { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .92; }
+@keyframes staso-pen-draw { 0% { stroke-dashoffset: 1; } 100% { stroke-dashoffset: 0; } }
+body[data-view="work"]:not(.detail-open) .project-slide.is-active .project-card[data-project="staso"] .staso-pen--card path,
+body.detail-open .project-detail.is-staso-detail .staso-pen--hero path { animation: staso-pen-draw .85s cubic-bezier(.55, .05, .25, 1) .55s forwards; }
+@media (prefers-reduced-motion: reduce) { .staso-pen path { stroke-dashoffset: 0; animation: none !important; } }
