@@ -365,3 +365,9 @@ body[data-view="work"] .work-view { opacity: 1; visibility: visible; transition-
   button, a { cursor: pointer; }
   .cursor, .cursor-trails { display: none; }
 }
+
+/* Smaller artwork on drawing & painting detail pages (desktop) */
+@media (min-width: 761px) {
+  .project-detail.is-portrait-detail .project-detail-visual img { height: min(48vh, 520px); max-height: none; max-width: min(34vw, 460px); }
+  .project-detail.is-portrait-detail[data-project="passage-of-time"] .project-detail-visual img { height: min(70vh, 720px); max-width: none; }
+}
