@@ -29,6 +29,29 @@ const stasoCaseStudy = document.querySelector(".staso-case");
 const troshareCaseStudy = document.querySelector(".troshare-case");
 const batteryCaseStudy = document.querySelector(".battery-case");
 const envCaseStudy = document.querySelector(".env-case");
+const hopesCaseStudy = document.querySelector(".hopes-case");
+const hopesDemo = document.querySelector(".hopes-demo");
+const hopesDemoVideo = document.querySelector(".hopes-demo-video");
+const hopesDemoStart = document.querySelector(".hopes-demo-start");
+
+function resetHopesDemo() {
+  if (!hopesDemoVideo) return;
+  hopesDemoVideo.pause();
+  if (hopesDemoVideo.currentTime) hopesDemoVideo.currentTime = 0;
+  hopesDemoVideo.controls = false;
+  hopesDemo.classList.remove("is-playing");
+  hopesDemoStart.hidden = false;
+}
+
+if (hopesDemoStart) {
+  hopesDemoStart.addEventListener("click", () => {
+    hopesDemo.classList.add("is-playing");
+    hopesDemoStart.hidden = true;
+    hopesDemoVideo.controls = true;
+    hopesDemoVideo.play().catch(() => {});
+    hopesDemoVideo.focus({ preventScroll: true });
+  });
+}
 const finePointer = window.matchMedia("(pointer: fine)").matches;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const baseTitle = document.title;
@@ -58,7 +81,8 @@ function projectIndexFromHash() {
 function hideProjectDetail({ clearUrl = false, restoreFocus = false } = {}) {
   const wasVisible = projectDetail.classList.contains("is-visible");
   projectDetail.classList.remove("is-visible");
-  projectDetail.classList.remove("is-fold-detail", "is-tik-tock-detail", "is-staso-detail", "is-troshare-detail", "is-battery-detail", "is-env-detail", "is-drawing-detail", "is-portrait-detail");
+  projectDetail.classList.remove("is-fold-detail", "is-tik-tock-detail", "is-staso-detail", "is-troshare-detail", "is-battery-detail", "is-env-detail", "is-hopes-detail", "is-drawing-detail", "is-portrait-detail");
+  resetHopesDemo();
   delete projectDetail.dataset.project;
   body.classList.remove("detail-open");
   projectDetail.setAttribute("aria-hidden", "true");
@@ -85,6 +109,7 @@ function openProject(index, historyMode = "push") {
   const isTroShare = card.dataset.project === "troshare";
   const isBattery = card.dataset.project === "battery-recycling-box";
   const isEnv = card.dataset.project === "environmental-council";
+  const isHopes = card.dataset.project === "hopes-in-bloom";
   const isDrawing = card.querySelector("small").textContent.trim().startsWith("Drawing");
   const isPortrait = card.classList.contains("project-portrait");
 
@@ -111,6 +136,8 @@ function openProject(index, historyMode = "push") {
   if (troshareCaseStudy) troshareCaseStudy.hidden = !isTroShare;
   batteryCaseStudy.hidden = !isBattery;
   envCaseStudy.hidden = !isEnv;
+  resetHopesDemo();
+  if (hopesCaseStudy) hopesCaseStudy.hidden = !isHopes;
   projectDetail.scrollTop = 0;
   projectDetail.classList.toggle("is-fold-detail", isFold);
   projectDetail.classList.toggle("is-tik-tock-detail", isTikTock);
@@ -118,6 +145,7 @@ function openProject(index, historyMode = "push") {
   projectDetail.classList.toggle("is-troshare-detail", isTroShare);
   projectDetail.classList.toggle("is-battery-detail", isBattery);
   projectDetail.classList.toggle("is-env-detail", isEnv);
+  projectDetail.classList.toggle("is-hopes-detail", isHopes);
   projectDetail.classList.toggle("is-drawing-detail", isDrawing);
   projectDetail.classList.toggle("is-portrait-detail", isPortrait);
   projectDetail.dataset.project = card.dataset.project;

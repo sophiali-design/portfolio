@@ -1,0 +1,12 @@
+/* Hopes in Bloom: same header as the other case studies, demo video centred below. */
+.project-detail.is-hopes-detail .project-detail-layout { display: none; }
+.project-detail.is-hopes-detail .project-detail-page { width: min(100%, 1240px); }
+.project-detail.is-hopes-detail .project-detail-page > h2 { margin-bottom: clamp(38px, 5vh, 58px); }
+.hopes-case { display: grid; row-gap: clamp(72px, 8vw, 112px); }
+.hopes-case[hidden] { display: none; }
+.hopes-demo { position: relative; justify-self: center; width: min(100%, 1100px); line-height: 0; background: #151515; }
+.hopes-demo-video { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 912; object-fit: contain; background: #151515; }
+.hopes-demo-start { position: absolute; left: 50%; bottom: 8%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 999px; background: rgba(8, 8, 8, .55); color: #fff; font: 500 .72rem/1 "Inter", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; backdrop-filter: blur(4px); transition: background .25s ease, color .25s ease; }
+.hopes-demo-start span { font-size: .62rem; }
+.hopes-demo-start:hover, .hopes-demo-start:focus-visible { background: #fff; color: #080808; }
+.hopes-demo-start[hidden] { display: none; }
